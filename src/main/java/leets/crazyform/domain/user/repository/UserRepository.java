@@ -1,6 +1,6 @@
-package leets.crazyform.app.user.repository;
+package leets.crazyform.domain.user.repository;
 
-import leets.crazyform.app.user.domain.User;
+import leets.crazyform.domain.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

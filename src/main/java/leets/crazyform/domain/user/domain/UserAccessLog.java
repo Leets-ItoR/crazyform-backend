@@ -1,7 +1,7 @@
-package leets.crazyform.app.user.domain;
+package leets.crazyform.domain.user.domain;
 
 import jakarta.persistence.*;
-import leets.crazyform.app.shared.entity.BaseCreateTimeEntity;
+import leets.crazyform.domain.shared.entity.BaseCreateTimeEntity;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,9 +1,9 @@
-package leets.crazyform.app.user.domain;
+package leets.crazyform.domain.user.domain;
 
 import jakarta.annotation.PreDestroy;
 import jakarta.persistence.*;
-import leets.crazyform.app.shared.entity.BaseTimeEntity;
-import leets.crazyform.app.user.type.Vendor;
+import leets.crazyform.domain.shared.entity.BaseTimeEntity;
+import leets.crazyform.domain.user.type.Vendor;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

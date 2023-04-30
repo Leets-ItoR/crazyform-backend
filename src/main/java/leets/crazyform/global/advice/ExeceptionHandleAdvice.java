@@ -1,8 +1,8 @@
-package leets.crazyform.infrastructure.advice;
+package leets.crazyform.global.advice;
 
-import leets.crazyform.infrastructure.error.ErrorCode;
-import leets.crazyform.infrastructure.error.ErrorResponse;
-import leets.crazyform.infrastructure.error.exception.ServiceException;
+import leets.crazyform.global.error.ErrorCode;
+import leets.crazyform.global.error.ErrorResponse;
+import leets.crazyform.global.error.exception.ServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

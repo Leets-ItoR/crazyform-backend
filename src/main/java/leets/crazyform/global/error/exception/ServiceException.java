@@ -1,6 +1,6 @@
-package leets.crazyform.infrastructure.error.exception;
+package leets.crazyform.global.error.exception;
 
-import leets.crazyform.infrastructure.error.ErrorCode;
+import leets.crazyform.global.error.ErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

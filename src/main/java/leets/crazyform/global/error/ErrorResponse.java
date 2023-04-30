@@ -1,4 +1,4 @@
-package leets.crazyform.infrastructure.error;
+package leets.crazyform.global.error;
 
 import lombok.Getter;
 
