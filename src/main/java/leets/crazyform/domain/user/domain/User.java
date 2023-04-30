@@ -46,10 +46,6 @@ public class User extends BaseTimeEntity {
     @Column()
     private LocalDateTime deletedAt;
 
-    @OneToMany
-    @JoinColumn(name = "user_id", nullable = false)
-    private List<UserAccessLog> userAccessLogs = new ArrayList<>();
-
     @PreDestroy()
     public void preDestroy() {
         this.deletedAt = LocalDateTime.now();

@@ -21,4 +21,8 @@ public class UserAccessLog extends BaseCreateTimeEntity {
 
     @Column
     private String userAgent;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }

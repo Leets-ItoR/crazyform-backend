@@ -8,5 +8,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface UserAccessLogRepository extends JpaRepository<UserAccessLog, Long> {
-    Optional<List<UserAccessLog>> findAllByUserId(UUID userId);
+    Optional<List<UserAccessLog>> findAllByUser_Id(UUID userId);
 }
