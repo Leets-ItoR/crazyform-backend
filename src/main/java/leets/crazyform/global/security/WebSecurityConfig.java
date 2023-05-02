@@ -1,5 +1,6 @@
 package leets.crazyform.global.security;
 
+import leets.crazyform.global.filter.ExceptionHandleFilter;
 import leets.crazyform.global.jwt.JwtFilter;
 import leets.crazyform.global.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +40,8 @@ public class WebSecurityConfig {
                 .requestMatchers("/user/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new ExceptionHandleFilter(), JwtFilter.class);
         return http.build();
     }
 }
