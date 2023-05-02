@@ -19,7 +19,7 @@ import org.springframework.web.cors.CorsUtils;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-    private static final String USER = "USER";
+    private static final String USER = "ROLE_USER";
     private final JwtProvider jwtProvider;
 
     @Bean

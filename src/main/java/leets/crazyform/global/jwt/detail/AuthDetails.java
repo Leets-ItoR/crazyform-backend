@@ -13,7 +13,7 @@ import java.util.Collections;
 @AllArgsConstructor
 public class AuthDetails implements UserDetails {
     private final String email;
-    private static final String ROLE = "USER";
+    private static final String ROLE = "ROLE_USER";
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
