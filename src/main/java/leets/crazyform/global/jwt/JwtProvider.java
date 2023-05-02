@@ -2,6 +2,8 @@ package leets.crazyform.global.jwt;
 
 import io.jsonwebtoken.*;
 import leets.crazyform.global.jwt.detail.AuthDetailsService;
+import leets.crazyform.global.jwt.exception.ExpiredTokenException;
+import leets.crazyform.global.jwt.exception.InvalidTokenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -50,6 +52,17 @@ public class JwtProvider {
         Collection<? extends GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(claims.get("role").toString()));
         UserDetails principal = this.authDetailsService.loadUserByUsername(claims.getSubject());
         return new UsernamePasswordAuthenticationToken(principal, "", authorities);
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            parseClaims(token);
+            return true;
+        } catch (UnsupportedJwtException | IllegalArgumentException | MalformedJwtException e) {
+            throw new InvalidTokenException();
+        } catch (ExpiredJwtException e) {
+            throw new ExpiredTokenException();
+        }
     }
 
     private Claims parseClaims(String accessToken) {
