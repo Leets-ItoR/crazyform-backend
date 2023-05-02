@@ -19,7 +19,6 @@ import java.time.ZoneId;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.stream.Collectors;
 
 @Component
 public class JwtProvider {
@@ -32,16 +31,12 @@ public class JwtProvider {
         this.authDetailsService = authDetailsService;
     }
 
-    public String generateToken(Authentication authentication, boolean isRefreshToken) {
+    public String generateToken(String email, String role, boolean isRefreshToken) {
         Instant accessDate = LocalDateTime.now().plusHours(6).atZone(ZoneId.systemDefault()).toInstant();
         Instant refreshDate = LocalDateTime.now().plusDays(30).atZone(ZoneId.systemDefault()).toInstant();
-        String authorities = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
-
         return Jwts.builder()
-                .claim("role", authorities)
-                .setSubject(authentication.getName())
+                .claim("role", role)
+                .setSubject(email)
                 .setExpiration(isRefreshToken ? Date.from(refreshDate) : Date.from(accessDate))
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
