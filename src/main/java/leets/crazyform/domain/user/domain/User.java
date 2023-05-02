@@ -4,10 +4,7 @@ import jakarta.annotation.PreDestroy;
 import jakarta.persistence.*;
 import leets.crazyform.domain.shared.entity.BaseTimeEntity;
 import leets.crazyform.domain.user.type.Vendor;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -23,6 +20,7 @@ import java.util.UUID;
 @Entity(name = "users")
 @SQLDelete(sql = "UPDATE USER SET deleted_at=now() where id=?")
 @Where(clause = "deleted_at IS NOT NULL")
+@Builder
 public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -50,6 +48,5 @@ public class User extends BaseTimeEntity {
     public void preDestroy() {
         this.deletedAt = LocalDateTime.now();
     }
-
 }
 
