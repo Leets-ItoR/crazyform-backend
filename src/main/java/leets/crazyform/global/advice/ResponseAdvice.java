@@ -1,4 +1,4 @@
-package leets.crazyform.infrastructure.advice;
+package leets.crazyform.global.advice;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
