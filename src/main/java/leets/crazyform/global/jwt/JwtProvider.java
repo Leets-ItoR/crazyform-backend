@@ -22,12 +22,16 @@ import java.util.Date;
 
 @Component
 public class JwtProvider {
-    private final String secret;
+    private final String accessSecret;
+    private final String refreshSecret;
     private final AuthDetailsService authDetailsService;
 
     @Autowired
-    public JwtProvider(@Value("${jwt.secret}") String secret, AuthDetailsService authDetailsService) {
-        this.secret = secret;
+    public JwtProvider(@Value("${jwt.access_secret}") String accessSecret,
+                       @Value("${jwt.refresh_secret}") String refreshSecret,
+                       AuthDetailsService authDetailsService) {
+        this.accessSecret = accessSecret;
+        this.refreshSecret = refreshSecret;
         this.authDetailsService = authDetailsService;
     }
 
@@ -38,20 +42,20 @@ public class JwtProvider {
                 .claim("role", role)
                 .setSubject(email)
                 .setExpiration(isRefreshToken ? Date.from(refreshDate) : Date.from(accessDate))
-                .signWith(SignatureAlgorithm.HS256, secret)
+                .signWith(SignatureAlgorithm.HS256, isRefreshToken ? refreshSecret : accessSecret)
                 .compact();
     }
 
     public Authentication getAuthentication(String token) {
-        Claims claims = parseClaims(token);
+        Claims claims = parseClaims(token, false);
         Collection<? extends GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(claims.get("role").toString()));
         UserDetails principal = this.authDetailsService.loadUserByUsername(claims.getSubject());
         return new UsernamePasswordAuthenticationToken(principal, "", authorities);
     }
 
-    public boolean validateToken(String token) {
+    public boolean validateToken(String token, boolean isRefreshToken) {
         try {
-            parseClaims(token);
+            parseClaims(token, isRefreshToken);
             return true;
         } catch (SignatureException | UnsupportedJwtException | IllegalArgumentException | MalformedJwtException e) {
             throw new InvalidTokenException();
@@ -60,9 +64,9 @@ public class JwtProvider {
         }
     }
 
-    private Claims parseClaims(String accessToken) {
+    private Claims parseClaims(String accessToken, boolean isRefreshToken) {
         try {
-            JwtParser parser = Jwts.parser().setSigningKey(secret);
+            JwtParser parser = Jwts.parser().setSigningKey(isRefreshToken ? refreshSecret : accessToken);
             return parser.parseClaimsJws(accessToken).getBody();
         } catch (ExpiredJwtException e) {
             return e.getClaims();
