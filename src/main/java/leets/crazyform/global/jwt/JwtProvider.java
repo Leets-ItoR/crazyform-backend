@@ -35,11 +35,11 @@ public class JwtProvider {
         this.authDetailsService = authDetailsService;
     }
 
-    public String generateToken(String email, String role, boolean isRefreshToken) {
+    public String generateToken(String email, AuthRole role, boolean isRefreshToken) {
         Instant accessDate = LocalDateTime.now().plusHours(6).atZone(ZoneId.systemDefault()).toInstant();
         Instant refreshDate = LocalDateTime.now().plusDays(30).atZone(ZoneId.systemDefault()).toInstant();
         return Jwts.builder()
-                .claim("role", role)
+                .claim("role", role.getRole())
                 .setSubject(email)
                 .setExpiration(isRefreshToken ? Date.from(refreshDate) : Date.from(accessDate))
                 .signWith(SignatureAlgorithm.HS256, isRefreshToken ? refreshSecret : accessSecret)

@@ -8,11 +8,9 @@ import leets.crazyform.global.jwt.AuthRole;
 import leets.crazyform.global.jwt.JwtProvider;
 import leets.crazyform.global.jwt.dto.JwtResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserLoginImpl implements UserLogin {
@@ -30,8 +28,8 @@ public class UserLoginImpl implements UserLogin {
             throw new PasswordNotMatchException();
         }
 
-        String accessToken = jwtProvider.generateToken(user.getEmail(), AuthRole.USER.getRole(), false);
-        String refreshToken = jwtProvider.generateToken(user.getEmail(), AuthRole.USER.getRole(), true);
+        String accessToken = jwtProvider.generateToken(user.getEmail(), AuthRole.USER, false);
+        String refreshToken = jwtProvider.generateToken(user.getEmail(), AuthRole.USER, true);
         return new JwtResponse(accessToken, refreshToken);
     }
 }
