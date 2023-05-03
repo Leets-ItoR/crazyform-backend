@@ -4,10 +4,7 @@ import jakarta.annotation.PreDestroy;
 import jakarta.persistence.*;
 import leets.crazyform.domain.shared.entity.BaseTimeEntity;
 import leets.crazyform.domain.user.type.Vendor;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -18,6 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Entity(name = "users")
