@@ -22,7 +22,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity(name = "users")
 @SQLDelete(sql = "UPDATE USER SET deleted_at=now() where id=?")
-@Where(clause = "deleted_at IS NOT NULL")
+@Where(clause = "deleted_at IS NULL")
 public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
