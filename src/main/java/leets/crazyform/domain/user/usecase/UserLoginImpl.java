@@ -1,6 +1,7 @@
 package leets.crazyform.domain.user.usecase;
 
 import leets.crazyform.domain.user.domain.User;
+import leets.crazyform.domain.user.exception.PasswordNotMatchException;
 import leets.crazyform.domain.user.exception.UserNotFoundException;
 import leets.crazyform.domain.user.repository.UserRepository;
 import leets.crazyform.global.jwt.AuthRole;
@@ -26,7 +27,7 @@ public class UserLoginImpl implements UserLogin {
                 .orElseThrow(UserNotFoundException::new);
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new UserNotFoundException();
+            throw new PasswordNotMatchException();
         }
 
         String accessToken = jwtProvider.generateToken(user.getEmail(), AuthRole.USER.getRole(), false);
