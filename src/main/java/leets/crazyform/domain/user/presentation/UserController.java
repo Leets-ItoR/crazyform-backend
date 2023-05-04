@@ -26,6 +26,6 @@ public class UserController {
     @GetMapping("/signup")
     public JwtResponse signup() {
         // TODO: 아래와 같은 형태로 usecase를 호출합니다.
-        return userSignup.execute("email", "password", "nickname", Vendor.valueOf("vendor"));
+        return userSignup.execute("email", "password", "nickname");
     }
 }

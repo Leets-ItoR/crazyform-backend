@@ -22,7 +22,7 @@ public class UserSignupImpl implements UserSignup {
 
     @Transactional
     @Override
-    public JwtResponse execute(String email, String password, String nickname, Vendor vendor) throws EmailDuplicateException, PasswordInvalidException {
+    public JwtResponse execute(String email, String password, String nickname) throws EmailDuplicateException, PasswordInvalidException {
         // 이메일 중복 체크
         if (userRepository.findByEmail(email).isPresent()) {
             throw new EmailDuplicateException();
@@ -37,16 +37,13 @@ public class UserSignupImpl implements UserSignup {
         User user = User.builder()
                 .email(email)
                 .nickname(nickname)
-                .vendor(vendor)
                 .password(passwordEncoder.encode(password))
                 .build();
 
         // User 객체 저장
         userRepository.save(user);
 
-        // JWT 토큰 생성 후 반환
-        String accessToken = generateJwtToken(user.getId(), user.getEmail(), user.getNickname(), user.getVendor());
-        return new JwtResponse(accessToken, "");
+        return null;
     }
     // JWT 토큰 생성 메소드
     private String generateJwtToken(UUID userId, String email, String nickname, Vendor vendor) {
