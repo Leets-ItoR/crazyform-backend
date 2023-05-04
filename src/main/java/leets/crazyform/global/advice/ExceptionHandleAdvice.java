@@ -5,6 +5,7 @@ import leets.crazyform.global.error.ErrorResponse;
 import leets.crazyform.global.error.exception.ServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingRequestCookieException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -15,6 +16,13 @@ public class ExceptionHandleAdvice {
         ErrorResponse response = new ErrorResponse(ex.getErrorCode());
         return new ResponseEntity<>(response, HttpStatus.valueOf(ex.getErrorCode().getHttpStatus()));
     }
+
+    @ExceptionHandler(MissingRequestCookieException.class)
+    public ResponseEntity<ErrorResponse> handleMissingRequestCookieException(MissingRequestCookieException ex) {
+        ErrorResponse response = new ErrorResponse(ErrorCode.COOKIE_NOT_FOUND);
+        return new ResponseEntity<>(response, HttpStatus.valueOf(400));
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception ex) {
         ErrorResponse response = new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR);
