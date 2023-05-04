@@ -36,7 +36,10 @@ public class WebSecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(CorsUtils::isCorsRequest).permitAll()
+
                 .requestMatchers("/user/login").permitAll()
+                .requestMatchers("/user/refresh").permitAll()
+
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)

@@ -1,5 +1,6 @@
 package leets.crazyform.domain.user.usecase;
 
+import io.jsonwebtoken.Claims;
 import leets.crazyform.global.jwt.AuthRole;
 import leets.crazyform.global.jwt.JwtProvider;
 import leets.crazyform.global.jwt.dto.JwtResponse;
@@ -12,9 +13,11 @@ public class RefreshTokenImpl implements RefreshToken {
     private final JwtProvider jwtProvider;
 
     @Override
-    public JwtResponse execute(String email, AuthRole role, String refreshToken) {
+    public JwtResponse execute(String refreshToken) {
         jwtProvider.validateToken(refreshToken, true);
-        String newAccessToken = jwtProvider.generateToken(email, role, false);
+        Claims claims = jwtProvider.parseClaims(refreshToken, true);
+        String role = claims.get("role", String.class);
+        String newAccessToken = jwtProvider.generateToken(claims.getSubject(), AuthRole.valueOf(role), false);
         return new JwtResponse(newAccessToken, null);
     }
 }
