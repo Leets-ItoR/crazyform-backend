@@ -28,8 +28,8 @@ public class UserLoginImpl implements UserLogin {
             throw new PasswordNotMatchException();
         }
 
-        String accessToken = jwtProvider.generateToken(user.getEmail(), AuthRole.USER, false);
-        String refreshToken = jwtProvider.generateToken(user.getEmail(), AuthRole.USER, true);
+        String accessToken = jwtProvider.generateToken(user.getEmail(), AuthRole.ROLE_USER, false);
+        String refreshToken = jwtProvider.generateToken(user.getEmail(), AuthRole.ROLE_USER, true);
         return new JwtResponse(accessToken, refreshToken);
     }
 }
