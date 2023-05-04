@@ -1,5 +1,6 @@
 package leets.crazyform.global.jwt.detail;
 
+import leets.crazyform.global.jwt.AuthRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,11 +14,10 @@ import java.util.Collections;
 @AllArgsConstructor
 public class AuthDetails implements UserDetails {
     private final String email;
-    private static final String ROLE = "USER";
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(ROLE));
+        return Collections.singletonList(new SimpleGrantedAuthority(AuthRole.ROLE_ADMIN.getRole()));
     }
 
     @Override

@@ -19,7 +19,6 @@ import org.springframework.web.cors.CorsUtils;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-    private static final String USER = "USER";
     private final JwtProvider jwtProvider;
 
     @Bean
@@ -29,19 +28,22 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+        return http
+                .cors().and()
                 .csrf().disable()
                 .formLogin().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .authorizeHttpRequests()
                 .requestMatchers(CorsUtils::isCorsRequest).permitAll()
+
                 .requestMatchers("/user/login").permitAll()
-                .requestMatchers("/user/signup").permitAll()
+                .requestMatchers("/user/refresh").permitAll()
+
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new ExceptionHandleFilter(), JwtFilter.class);
-        return http.build();
+                .addFilterBefore(new ExceptionHandleFilter(), JwtFilter.class)
+                .build();
     }
 }

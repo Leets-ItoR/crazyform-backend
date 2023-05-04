@@ -15,12 +15,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Entity(name = "users")
 @SQLDelete(sql = "UPDATE USER SET deleted_at=now() where id=?")
-@Where(clause = "deleted_at IS NOT NULL")
-@Builder
+@Where(clause = "deleted_at IS NULL")
 public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
