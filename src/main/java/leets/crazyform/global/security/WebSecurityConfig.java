@@ -37,6 +37,8 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(CorsUtils::isCorsRequest).permitAll()
 
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                
                 .requestMatchers("/user/login").permitAll()
                 .requestMatchers("/user/refresh").permitAll()
 
