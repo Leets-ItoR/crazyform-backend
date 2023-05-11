@@ -48,6 +48,5 @@ public class User extends BaseTimeEntity {
     public void preDestroy() {
         this.deletedAt = LocalDateTime.now();
     }
-
 }
 

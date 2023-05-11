@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import leets.crazyform.domain.user.presentation.dto.LoginRequest;
+import leets.crazyform.domain.user.presentation.dto.SignupRequest;
 import leets.crazyform.domain.user.usecase.RefreshToken;
 import leets.crazyform.domain.user.usecase.UserLogin;
 import leets.crazyform.global.error.ErrorResponse;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
     private final UserLogin userLogin;
+    private final UserSignup userSignup;
     private final RefreshToken doRefreshToken;
 
     @Operation(summary = "관리자(설문생성자) 로그인", description = "관리자 계정으로 로그인합니다. RefreshToken은 Cookie에 자동으로 추가됩니다.")
@@ -52,5 +54,15 @@ public class UserController {
     @PostMapping("/refresh")
     public JwtResponse refresh(@Parameter(hidden = true) @CookieValue("refreshToken") String refreshToken) {
         return doRefreshToken.execute(refreshToken);
+    }
+
+    @PostMapping("/signup")
+    public JwtResponse signup(HttpServletResponse res, @Validated @RequestBody SignupRequest signupRequest) {
+        JwtResponse jwt = userSignup.execute(signupRequest.getEmail(), signupRequest.getPassword(), signupRequest.getNickname());
+        Cookie cookie = new Cookie("refreshToken", jwt.getRefreshToken());
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        res.addCookie(cookie);
+        return jwt;
     }
 }

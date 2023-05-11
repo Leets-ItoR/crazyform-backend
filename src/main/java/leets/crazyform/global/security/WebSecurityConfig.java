@@ -41,6 +41,7 @@ public class WebSecurityConfig {
                 
                 .requestMatchers("/user/login").permitAll()
                 .requestMatchers("/user/refresh").permitAll()
+                .requestMatchers("/user/signup").permitAll()
 
                 .anyRequest().authenticated()
                 .and()
