@@ -4,6 +4,7 @@ package leets.crazyform.domain.user.presentation;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import leets.crazyform.domain.user.presentation.dto.LoginRequest;
+import leets.crazyform.domain.user.presentation.dto.SignupRequest;
 import leets.crazyform.domain.user.usecase.RefreshToken;
 import leets.crazyform.domain.user.usecase.UserLogin;
 import leets.crazyform.domain.user.usecase.UserSignup;
@@ -38,9 +39,13 @@ public class UserController {
         return doRefreshToken.execute(refreshToken);
     }
 
-    @GetMapping("/signup")
-    public JwtResponse signup() {
-        // TODO: 아래와 같은 형태로 usecase를 호출합니다.
-        return userSignup.execute("email", "password", "nickname");
+    @PostMapping("/signup")
+    public JwtResponse signup(HttpServletResponse res, @Validated @RequestBody SignupRequest signupRequest) {
+        JwtResponse jwt = userSignup.execute(signupRequest.getEmail(), signupRequest.getPassword(), signupRequest.getNickname());
+        Cookie cookie = new Cookie("refreshToken", jwt.getRefreshToken());
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        res.addCookie(cookie);
+        return jwt;
     }
 }

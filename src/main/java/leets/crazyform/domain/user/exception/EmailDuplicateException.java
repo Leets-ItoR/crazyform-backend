@@ -5,6 +5,6 @@ import leets.crazyform.global.error.exception.ServiceException;
 
 public class EmailDuplicateException extends ServiceException {
     public EmailDuplicateException() {
-        super(ErrorCode.USER_NOT_FOUND);
+        super(ErrorCode.EMAIL_DUPLICATE);
     }
 }
