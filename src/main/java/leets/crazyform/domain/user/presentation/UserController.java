@@ -13,6 +13,7 @@ import leets.crazyform.domain.user.presentation.dto.LoginRequest;
 import leets.crazyform.domain.user.presentation.dto.SignupRequest;
 import leets.crazyform.domain.user.usecase.RefreshToken;
 import leets.crazyform.domain.user.usecase.UserLogin;
+import leets.crazyform.domain.user.usecase.UserSignup;
 import leets.crazyform.global.error.ErrorResponse;
 import leets.crazyform.global.jwt.dto.JwtResponse;
 import lombok.RequiredArgsConstructor;
@@ -56,6 +57,12 @@ public class UserController {
         return doRefreshToken.execute(refreshToken);
     }
 
+    @Operation(summary = "관리자(설문생성자) 회원가입", description = "관리자 회원가입을 합니다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = JwtResponse.class))),
+            @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
     @PostMapping("/signup")
     public JwtResponse signup(HttpServletResponse res, @Validated @RequestBody SignupRequest signupRequest) {
         JwtResponse jwt = userSignup.execute(signupRequest.getEmail(), signupRequest.getPassword(), signupRequest.getNickname());
