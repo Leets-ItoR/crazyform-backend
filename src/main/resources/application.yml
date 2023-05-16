@@ -35,3 +35,8 @@ spring:
 jwt:
   access_secret: ${JWT_ACCESS_SECRET}
   refresh_secret: ${JWT_REFRESH_SECRET}
+
+cors:
+  host:
+    development: ${CORS_HOST_DEVELOPMENT}
+    production: ${CORS_HOST_PRODUCTION}
