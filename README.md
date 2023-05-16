@@ -14,6 +14,10 @@ DATABASE_PASSWORD=
 # JWT 암호화를 위한 키
 JWT_ACCESS_SECRET=
 JWT_REFRESH_SECRET=
+
+# CORS 도메인 정보
+CORS_HOST_DEVELOPMENT=http://localhost:5175
+CORS_HOST_PRODUCTION=
 ```
 
 ## Commit Convention
