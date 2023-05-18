@@ -3,6 +3,7 @@ package leets.crazyform.global.security;
 import leets.crazyform.global.filter.ExceptionHandleFilter;
 import leets.crazyform.global.jwt.JwtFilter;
 import leets.crazyform.global.jwt.JwtProvider;
+import leets.crazyform.global.jwt.detail.OAuthDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,7 @@ import org.springframework.web.cors.CorsUtils;
 @EnableWebSecurity
 public class WebSecurityConfig {
     private final JwtProvider jwtProvider;
+    private final OAuthDetailService oAuthDetailService;
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
@@ -45,6 +47,10 @@ public class WebSecurityConfig {
 
                 .anyRequest().authenticated()
                 .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(oAuthDetailService)
+                .and().and()
                 .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new ExceptionHandleFilter(), JwtFilter.class)
                 .build();
