@@ -3,10 +3,10 @@ package leets.crazyform.domain.workspace.presentation.dto;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
+import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class WorkspaceRequest {
 
@@ -15,11 +15,4 @@ public class WorkspaceRequest {
 
     @NotBlank
     private String handle;
-
-//    @NotBlank
-//    private LocalDateTime createdAt;
-//
-//    @NotBlank
-//    private LocalDateTime updatedAt;
-
 }
