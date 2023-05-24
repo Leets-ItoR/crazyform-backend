@@ -36,6 +36,7 @@ public class WorkspaceController {
             @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = WorkspaceResponse.class))),
             @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
+
     @PostMapping("/create")
     public WorkspaceResponse createWorkspace(@Validated @RequestBody WorkspaceRequest workspaceRequest) {
         String name = workspaceRequest.getName();

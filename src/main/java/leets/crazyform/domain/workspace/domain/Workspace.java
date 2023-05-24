@@ -46,19 +46,28 @@ public class Workspace extends BaseTimeEntity {
     }
 
     @Transactional
-    public abstract JwtResponse execute(String name, String handle);
+    public JwtResponse execute(String name, String handle) {
+        return null;
+    }
 
     @Transactional
-    public abstract Workspace createWorkspace(String name, String handle);
+    public Workspace createWorkspace(String name, String handle) {
+        this.createdAt = LocalDateTime.now();
+        return null;
+    }
 
     @Transactional
-    public abstract Workspace updateWorkspace(UUID workspaceId, String name, String handle) throws WorkspaceNotFoundException;
+    public Workspace updateWorkspace(UUID workspaceId, String name, String handle) throws WorkspaceNotFoundException {
+        this.updatedAt = LocalDateTime.now();
+        return null;
+    }
 
     @Transactional
-    public abstract void deleteWorkspace(UUID workspaceId) throws WorkspaceNotFoundException;
+    public void deleteWorkspace(UUID workspaceId) throws WorkspaceNotFoundException {
 
-    public abstract Workspace getWorkspaceById(UUID workspaceId) throws WorkspaceNotFoundException;
+    }
 
-    // 생성자, getter/setter, equals/hashCode, toString 등의 메서드 추가...
-
+    public Workspace getWorkspaceById(UUID workspaceId) throws WorkspaceNotFoundException {
+        return null;
+    }
 }

@@ -19,7 +19,4 @@ public class WorkspaceResponse {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // 다른 필드들...
-
-    // 생성자, getter/setter, equals/hashCode, toString 등의 메서드 추가...
 }
