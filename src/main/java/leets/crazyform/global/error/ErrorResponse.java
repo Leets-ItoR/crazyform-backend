@@ -13,7 +13,17 @@ public class ErrorResponse {
         this.message = errorCode.getMessage();
         this.code = errorCode.getCode();
     }
-    
+
+//    public class ErrorResponse {
+//        private int value;
+//        private String message;
+//
+//        public ErrorResponse(int value, String message) {
+//            this.value = value;
+//            this.message = message;
+//        }
+//    }
+
     public static ErrorResponse of(ErrorCode errorCode) {
         return new ErrorResponse(errorCode);
     }

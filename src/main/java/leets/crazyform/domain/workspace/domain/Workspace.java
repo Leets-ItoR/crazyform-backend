@@ -3,8 +3,11 @@ package leets.crazyform.domain.workspace.domain;
 import jakarta.annotation.PreDestroy;
 import jakarta.persistence.*;
 import leets.crazyform.domain.shared.entity.BaseTimeEntity;
+import leets.crazyform.domain.workspace.exception.WorkspaceNotFoundException;
+import leets.crazyform.global.jwt.dto.JwtResponse;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -15,7 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Entity(name = "workspaces")
-public class Workspace extends BaseTimeEntity {
+public abstract class Workspace extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -42,6 +45,20 @@ public class Workspace extends BaseTimeEntity {
         // 객체 파괴 전 호출되는 메서드
         // 필요한 로직을 구현할 수 있습니다.
     }
+
+    @Transactional
+    public abstract JwtResponse execute(String name, String handle);
+
+    @Transactional
+    public abstract Workspace createWorkspace(String name, String handle);
+
+    @Transactional
+    public abstract Workspace updateWorkspace(UUID workspaceId, String name, String handle) throws WorkspaceNotFoundException;
+
+    @Transactional
+    public abstract void deleteWorkspace(UUID workspaceId) throws WorkspaceNotFoundException;
+
+    public abstract Workspace getWorkspaceById(UUID workspaceId) throws WorkspaceNotFoundException;
 
     // 생성자, getter/setter, equals/hashCode, toString 등의 메서드 추가...
 

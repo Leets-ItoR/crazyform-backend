@@ -50,6 +50,7 @@ public class WorkspaceController {
             @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
+
     @GetMapping("/{workspaceId}")
     public WorkspaceResponse getWorkspace(@PathVariable UUID workspaceId) {
         try {
@@ -68,6 +69,7 @@ public class WorkspaceController {
             @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
+
     @PutMapping("/{workspaceId}")
     public WorkspaceResponse updateWorkspace(@PathVariable UUID workspaceId, @Validated @RequestBody WorkspaceRequest workspaceRequest) {
         String name = workspaceRequest.getName();
@@ -88,6 +90,7 @@ public class WorkspaceController {
             @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
+
     @DeleteMapping("/{workspaceId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteWorkspace(@PathVariable UUID workspaceId) {

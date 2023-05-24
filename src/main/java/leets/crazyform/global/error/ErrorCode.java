@@ -14,8 +14,9 @@ public enum ErrorCode {
     USER_NOT_FOUND(404, "USER_NOT_FOUND", "존재하지 않는 사용자입니다."),
     PASSWORD_NOT_MATCH(400, "PASSWORD_NOT_MATCH", "비밀번호가 일치하지 않습니다."),
     EMAIL_DUPLICATE(409, "EMAIL_DUPLICATE", "중복된 이메일입니다."),
-    WORKSPACE_NOT_FOUND(400, "WORKSPACE_NOT_FOUND", "워크스페이스를 찾을 수 없습니다.");
-
+    WORKSPACE_NOT_FOUND(400, "WORKSPACE_NOT_FOUND", "워크스페이스를 찾을 수 없습니다."),
+    WORKSPACE_NOT_CREATED(401, "WORKSPACE_NOT_CREATED", "워크스페이스가 생성되지 않았습니다."),
+    WORKSPACE_NOT_DELETED(401, "WORKSPACE_NOT_DELETED", "워크스페이스가 삭제되지 않았습니다.");
     private final int httpStatus;
     private final String code;
     private final String message;
