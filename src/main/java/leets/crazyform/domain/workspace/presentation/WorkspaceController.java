@@ -53,14 +53,17 @@ public class WorkspaceController {
 
     @GetMapping("/{workspaceId}")
     public WorkspaceResponse getWorkspace(@PathVariable UUID workspaceId) {
-        try {
-            Workspace workspace = workspaceRetrieval.getWorkspaceById(workspaceId);
-            return new WorkspaceResponse(workspace.getId(), workspace.getName(), workspace.getHandle(), workspace.getCreatedAt(), workspace.getUpdatedAt());
-        } catch (WorkspaceNotFoundException e) {
-            // WorkspaceNotFoundException 처리
-            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage());
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, errorResponse.toString(), e);
-        }
+        Workspace workspace = workspaceRetrieval.getWorkspaceById(workspaceId);
+        return new WorkspaceResponse(workspace.getId(), workspace.getName(), workspace.getHandle(), workspace.getCreatedAt(), workspace.getUpdatedAt());
+
+//        try {
+//            Workspace workspace = workspaceRetrieval.getWorkspaceById(workspaceId);
+//            return new WorkspaceResponse(workspace.getId(), workspace.getName(), workspace.getHandle(), workspace.getCreatedAt(), workspace.getUpdatedAt());
+//        } catch (WorkspaceNotFoundException e) {
+//            // WorkspaceNotFoundException 처리
+////            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage());
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, errorResponse.toString(), e);
+//        }
     }
 
     @Operation(summary = "워크스페이스 수정", description = "워크스페이스를 수정합니다.")
@@ -74,14 +77,17 @@ public class WorkspaceController {
     public WorkspaceResponse updateWorkspace(@PathVariable UUID workspaceId, @Validated @RequestBody WorkspaceRequest workspaceRequest) {
         String name = workspaceRequest.getName();
         String handle = workspaceRequest.getHandle();
-        try {
-            Workspace workspace = workspaceUpdate.updateWorkspace(workspaceId, name, handle);
-            return new WorkspaceResponse(workspace.getId(), workspace.getName(), workspace.getHandle(), workspace.getCreatedAt(), workspace.getUpdatedAt());
-        } catch (WorkspaceNotFoundException e) {
-            // WorkspaceNotFoundException 처리
-            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage());
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, errorResponse.toString(), e);
-        }
+        Workspace workspace = workspaceUpdate.updateWorkspace(workspaceId, name, handle);
+        return new WorkspaceResponse(workspace.getId(), workspace.getName(), workspace.getHandle(), workspace.getCreatedAt(), workspace.getUpdatedAt());
+
+//        try {
+//            Workspace workspace = workspaceUpdate.updateWorkspace(workspaceId, name, handle);
+//            return new WorkspaceResponse(workspace.getId(), workspace.getName(), workspace.getHandle(), workspace.getCreatedAt(), workspace.getUpdatedAt());
+//        } catch (WorkspaceNotFoundException e) {
+//            // WorkspaceNotFoundException 처리
+////            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage());
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, errorResponse.toString(), e);
+//        }
     }
 
     @Operation(summary = "워크스페이스 삭제", description = "워크스페이스를 삭제합니다.")
@@ -94,12 +100,13 @@ public class WorkspaceController {
     @DeleteMapping("/{workspaceId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteWorkspace(@PathVariable UUID workspaceId) {
-        try {
-            workspaceDeletion.deleteWorkspace(workspaceId);
-        } catch (WorkspaceNotFoundException e) {
-            // WorkspaceNotFoundException 처리
-            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage());
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, errorResponse.toString(), e);
-        }
+        workspaceDeletion.deleteWorkspace(workspaceId);
+//        try {
+//            workspaceDeletion.deleteWorkspace(workspaceId);
+//        } catch (WorkspaceNotFoundException e) {
+//            // WorkspaceNotFoundException 처리
+////            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage());
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, errorResponse.toString(), e);
+//        }
     }
 }

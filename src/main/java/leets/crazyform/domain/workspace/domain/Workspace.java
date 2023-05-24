@@ -18,7 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Entity(name = "workspaces")
-public abstract class Workspace extends BaseTimeEntity {
+public class Workspace extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -42,8 +42,7 @@ public abstract class Workspace extends BaseTimeEntity {
 
     @PreDestroy
     public void preDestroy() {
-        // 객체 파괴 전 호출되는 메서드
-        // 필요한 로직을 구현할 수 있습니다.
+        // preDestroy() method implementation
     }
 
     @Transactional
