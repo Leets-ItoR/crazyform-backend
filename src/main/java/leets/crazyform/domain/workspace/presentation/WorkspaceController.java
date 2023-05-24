@@ -6,13 +6,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import leets.crazyform.domain.workspace.presentation.dto.WorkspaceRequest;
-import leets.crazyform.domain.workspace.presentation.dto.WorkspaceResponse; // 추가된 import문
+import leets.crazyform.domain.workspace.presentation.dto.WorkspaceResponse;
 import leets.crazyform.domain.workspace.usecase.WorkspaceCreation;
 import leets.crazyform.domain.workspace.usecase.WorkspaceDeletion;
 import leets.crazyform.domain.workspace.usecase.WorkspaceRetrieval;
 import leets.crazyform.domain.workspace.usecase.WorkspaceUpdate;
-import leets.crazyform.domain.workspace.exception.WorkspaceNotFoundException; // 추가된 import문
-import leets.crazyform.domain.workspace.domain.Workspace; // 추가된 import문
+import leets.crazyform.domain.workspace.exception.WorkspaceNotFoundException;
+import leets.crazyform.domain.workspace.domain.Workspace;
 import leets.crazyform.global.error.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,5 @@
 package leets.crazyform.domain.user.presentation;
 
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -35,6 +34,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
+
     @PostMapping("/login")
     public JwtResponse login(HttpServletResponse res, @Validated @RequestBody LoginRequest loginRequest) {
         JwtResponse jwt = userLogin.execute(loginRequest.getEmail(), loginRequest.getPassword());
@@ -52,6 +52,7 @@ public class UserController {
             @ApiResponse(responseCode = "403", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
+
     @PostMapping("/refresh")
     public JwtResponse refresh(@Parameter(hidden = true) @CookieValue("refreshToken") String refreshToken) {
         return doRefreshToken.execute(refreshToken);
@@ -63,6 +64,7 @@ public class UserController {
             @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
+
     @PostMapping("/signup")
     public JwtResponse signup(HttpServletResponse res, @Validated @RequestBody SignupRequest signupRequest) {
         JwtResponse jwt = userSignup.execute(signupRequest.getEmail(), signupRequest.getPassword(), signupRequest.getNickname());
