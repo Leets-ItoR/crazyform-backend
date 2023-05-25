@@ -1,4 +1,4 @@
-package leets.crazyform.domain.creator.usecase;
+package leets.crazyform.domain.auth.usecase;
 
 import leets.crazyform.global.jwt.dto.JwtResponse;
 
