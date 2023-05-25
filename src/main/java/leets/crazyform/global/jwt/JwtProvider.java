@@ -65,7 +65,7 @@ public class JwtProvider {
 
     public Claims parseClaims(String accessToken, boolean isRefreshToken) {
         try {
-            JwtParser parser = Jwts.parser().setSigningKey(isRefreshToken ? refreshSecret : accessToken);
+            JwtParser parser = Jwts.parser().setSigningKey(isRefreshToken ? refreshSecret : accessSecret);
             return parser.parseClaimsJws(accessToken).getBody();
         } catch (ExpiredJwtException e) {
             return e.getClaims();
