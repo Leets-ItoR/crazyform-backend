@@ -1,6 +1,7 @@
 package leets.crazyform.domain.user.usecase;
 
 import leets.crazyform.domain.user.domain.User;
+import leets.crazyform.domain.user.exception.OnlySocialLoginException;
 import leets.crazyform.domain.user.exception.PasswordNotMatchException;
 import leets.crazyform.domain.user.exception.UserNotFoundException;
 import leets.crazyform.domain.user.repository.UserRepository;
@@ -23,6 +24,10 @@ public class UserLoginImpl implements UserLogin {
     public JwtResponse execute(String email, String password) throws UserNotFoundException {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(UserNotFoundException::new);
+
+        if (user.getPassword() == null) {
+            throw new OnlySocialLoginException();
+        }
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new PasswordNotMatchException();
