@@ -5,6 +5,8 @@ import leets.crazyform.domain.user.repository.UserRepository;
 import leets.crazyform.domain.user.type.Vendor;
 import leets.crazyform.global.error.ErrorCode;
 import leets.crazyform.global.error.exception.ServiceException;
+import leets.crazyform.global.oauth.attribute.GoogleOAuthAttribute;
+import leets.crazyform.global.oauth.attribute.KakaoOAuthAttribute;
 import leets.crazyform.global.oauth.attribute.NaverOAuthAttribute;
 import leets.crazyform.global.oauth.attribute.OAuthAttribute;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +32,12 @@ public class OAuthDetailService extends DefaultOAuth2UserService {
 
         if (vendor.equalsIgnoreCase(Vendor.NAVER.getVendor())) {
             attribute = Optional.of(new NaverOAuthAttribute((Map) oAuth2User.getAttributes().get("response")));
+        }
+        if (vendor.equalsIgnoreCase(Vendor.GOOGLE.getVendor())) {
+            attribute = Optional.of(new GoogleOAuthAttribute(oAuth2User.getAttributes()));
+        }
+        if (vendor.equalsIgnoreCase(Vendor.KAKAO.getVendor())) {
+            attribute = Optional.of(new KakaoOAuthAttribute((Map) oAuth2User.getAttributes().get("kakao_account")));
         }
 
         OAuthAttribute attr = attribute.orElseThrow(() -> new ServiceException(ErrorCode.INTERNAL_SERVER_ERROR));
