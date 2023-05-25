@@ -47,6 +47,7 @@ public class WebSecurityConfig {
 
                 .requestMatchers("/creator/login").permitAll()
                 .requestMatchers("/creator/signup").permitAll()
+                .requestMatchers("/creator/refresh").permitAll()
 
                 .anyRequest().authenticated()
                 .and()
