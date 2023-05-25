@@ -1,5 +1,6 @@
 package leets.crazyform.global.oauth;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,9 +9,6 @@ import leets.crazyform.global.jwt.JwtProvider;
 import leets.crazyform.global.jwt.detail.OAuthDetails;
 import leets.crazyform.global.jwt.dto.JwtResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -34,7 +32,7 @@ public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
         Map<String, Object> result = new HashMap<>();
         result.put("result", new JwtResponse(accessToken, refreshToken));
 
-        MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-        jsonConverter.write(result, MediaType.APPLICATION_JSON, new ServletServerHttpResponse(response));
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.getWriter().write(objectMapper.writeValueAsString(result));
     }
 }
