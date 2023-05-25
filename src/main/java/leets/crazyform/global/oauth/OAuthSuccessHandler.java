@@ -26,8 +26,8 @@ public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         OAuthDetails oAuthDetails = (OAuthDetails) authentication.getPrincipal();
         String email = oAuthDetails.getEmail();
-        String accessToken = jwtProvider.generateToken(email, AuthRole.ROLE_PARTICIPANT, false);
-        String refreshToken = jwtProvider.generateToken(email, AuthRole.ROLE_PARTICIPANT, true);
+        String accessToken = jwtProvider.generateToken(email, AuthRole.ROLE_USER, false);
+        String refreshToken = jwtProvider.generateToken(email, AuthRole.ROLE_USER, true);
 
         Map<String, Object> result = new HashMap<>();
         result.put("result", new JwtResponse(accessToken, refreshToken));

@@ -33,8 +33,8 @@ public class UserLoginImpl implements UserLogin {
             throw new PasswordNotMatchException();
         }
 
-        String accessToken = jwtProvider.generateToken(user.getEmail(), AuthRole.ROLE_ADMIN, false);
-        String refreshToken = jwtProvider.generateToken(user.getEmail(), AuthRole.ROLE_ADMIN, true);
+        String accessToken = jwtProvider.generateToken(user.getEmail(), AuthRole.ROLE_CREATOR, false);
+        String refreshToken = jwtProvider.generateToken(user.getEmail(), AuthRole.ROLE_CREATOR, true);
         return new JwtResponse(accessToken, refreshToken);
     }
 }

@@ -4,7 +4,6 @@ import leets.crazyform.domain.user.domain.User;
 import leets.crazyform.domain.user.repository.UserRepository;
 import leets.crazyform.domain.user.exception.EmailDuplicateException;
 import leets.crazyform.domain.user.exception.PasswordInvalidException;
-import leets.crazyform.domain.user.type.Vendor;
 import leets.crazyform.global.jwt.AuthRole;
 import leets.crazyform.global.jwt.dto.JwtResponse;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.UUID;
 import leets.crazyform.global.jwt.JwtProvider;
 
 @Slf4j
@@ -46,8 +44,8 @@ public class UserSignupImpl implements UserSignup {
         // User 객체 저장
         userRepository.save(user);
 
-        String accessToken = jwtProvider.generateToken(user.getEmail(), AuthRole.ROLE_ADMIN, false);
-        String refreshToken = jwtProvider.generateToken(user.getEmail(), AuthRole.ROLE_ADMIN, true);
+        String accessToken = jwtProvider.generateToken(user.getEmail(), AuthRole.ROLE_CREATOR, false);
+        String refreshToken = jwtProvider.generateToken(user.getEmail(), AuthRole.ROLE_CREATOR, true);
         return new JwtResponse(accessToken, refreshToken);
     }
 }
