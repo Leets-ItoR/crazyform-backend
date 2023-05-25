@@ -1,6 +1,7 @@
 package leets.crazyform.global.security;
 
 import leets.crazyform.global.filter.ExceptionHandleFilter;
+import leets.crazyform.global.jwt.AuthRole;
 import leets.crazyform.global.jwt.JwtFilter;
 import leets.crazyform.global.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +43,9 @@ public class WebSecurityConfig {
                 .requestMatchers("/user/login").permitAll()
                 .requestMatchers("/user/refresh").permitAll()
                 .requestMatchers("/user/signup").permitAll()
-                .requestMatchers("/workspace").permitAll()
+//                .requestMatchers("/workspace").permitAll()
+
+                .requestMatchers("/workspace/**").hasAnyAuthority(AuthRole.ROLE_ADMIN.getRole())
 
                 .anyRequest().authenticated()
                 .and()
