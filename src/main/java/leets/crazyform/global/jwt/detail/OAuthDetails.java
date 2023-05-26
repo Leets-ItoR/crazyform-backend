@@ -31,7 +31,7 @@ public class OAuthDetails implements UserDetails, OAuth2User {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(AuthRole.ROLE_PARTICIPANT.getRole()));
+        return Collections.singletonList(new SimpleGrantedAuthority(AuthRole.ROLE_USER.getRole()));
     }
 
     @Override

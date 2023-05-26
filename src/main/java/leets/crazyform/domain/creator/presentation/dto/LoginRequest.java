@@ -1,4 +1,4 @@
-package leets.crazyform.domain.user.presentation.dto;
+package leets.crazyform.domain.creator.presentation.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class SignupRequest {
+public class LoginRequest {
 
     @NotBlank
     @Email
@@ -15,7 +15,4 @@ public class SignupRequest {
 
     @NotBlank
     private String password;
-
-    @NotBlank
-    private String nickname;
 }

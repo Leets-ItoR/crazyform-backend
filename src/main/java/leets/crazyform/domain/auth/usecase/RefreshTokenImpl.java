@@ -1,4 +1,4 @@
-package leets.crazyform.domain.user.usecase;
+package leets.crazyform.domain.auth.usecase;
 
 import io.jsonwebtoken.Claims;
 import leets.crazyform.global.jwt.AuthRole;

@@ -43,9 +43,11 @@ public class WebSecurityConfig {
 
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
 
-                .requestMatchers("/user/login").permitAll()
                 .requestMatchers("/user/refresh").permitAll()
-                .requestMatchers("/user/signup").permitAll()
+
+                .requestMatchers("/creator/login").permitAll()
+                .requestMatchers("/creator/signup").permitAll()
+                .requestMatchers("/creator/refresh").permitAll()
 
                 .anyRequest().authenticated()
                 .and()

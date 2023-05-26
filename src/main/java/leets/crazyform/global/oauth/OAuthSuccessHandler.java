@@ -2,6 +2,7 @@ package leets.crazyform.global.oauth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import leets.crazyform.global.jwt.AuthRole;
@@ -26,8 +27,13 @@ public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         OAuthDetails oAuthDetails = (OAuthDetails) authentication.getPrincipal();
         String email = oAuthDetails.getEmail();
-        String accessToken = jwtProvider.generateToken(email, AuthRole.ROLE_PARTICIPANT, false);
-        String refreshToken = jwtProvider.generateToken(email, AuthRole.ROLE_PARTICIPANT, true);
+        String accessToken = jwtProvider.generateToken(email, AuthRole.ROLE_USER, false);
+        String refreshToken = jwtProvider.generateToken(email, AuthRole.ROLE_USER, true);
+
+        Cookie cookie = new Cookie("refreshToken", refreshToken);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        response.addCookie(cookie);
 
         Map<String, Object> result = new HashMap<>();
         result.put("result", new JwtResponse(accessToken, refreshToken));
