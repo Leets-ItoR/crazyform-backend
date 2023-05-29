@@ -1,7 +1,6 @@
 package leets.crazyform.domain.workspace.usecase;
 
 import leets.crazyform.domain.workspace.domain.Workspace;
-import leets.crazyform.domain.workspace.exception.WorkspaceCreationException;
 import leets.crazyform.domain.workspace.repository.WorkspaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,10 +24,8 @@ public class WorkspaceCreationImpl implements WorkspaceCreation {
                 .updatedAt(currentTime)
                 .build();
 
-        try {
-            return workspaceRepository.save(workspace);
-        } catch (Exception e) {
-            throw new WorkspaceCreationException("Failed to create workspace.", e);
-        }
+
+        return workspaceRepository.save(workspace);
+
     }
 }

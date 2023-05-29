@@ -1,6 +1,5 @@
 package leets.crazyform.domain.workspace.usecase;
 
-import leets.crazyform.domain.workspace.exception.WorkspaceDeletionException;
 import leets.crazyform.domain.workspace.exception.WorkspaceNotFoundException;
 import leets.crazyform.domain.workspace.repository.WorkspaceRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,10 +20,7 @@ public class WorkspaceDeletionImpl implements WorkspaceDeletion {
             throw new WorkspaceNotFoundException("Workspace not found with ID: " + workspaceId);
         }
 
-        try {
-            workspaceRepository.deleteById(workspaceId);
-        } catch (Exception e) {
-            throw new WorkspaceDeletionException("Failed to delete workspace.", e);
-        }
+        workspaceRepository.deleteById(workspaceId);
+
     }
 }

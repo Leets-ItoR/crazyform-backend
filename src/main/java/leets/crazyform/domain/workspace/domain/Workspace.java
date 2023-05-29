@@ -38,36 +38,4 @@ public class Workspace extends BaseTimeEntity {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    // 다른 필드들...
-
-    @PreDestroy
-    public void preDestroy() {
-        // preDestroy() method implementation
-    }
-
-    @Transactional
-    public JwtResponse execute(String name, String handle) {
-        return null;
-    }
-
-    @Transactional
-    public Workspace createWorkspace(String name, String handle) {
-        this.createdAt = LocalDateTime.now();
-        return null;
-    }
-
-    @Transactional
-    public Workspace updateWorkspace(UUID workspaceId, String name, String handle) throws WorkspaceNotFoundException {
-        this.updatedAt = LocalDateTime.now();
-        return null;
-    }
-
-    @Transactional
-    public void deleteWorkspace(UUID workspaceId) throws WorkspaceNotFoundException {
-
-    }
-
-    public Workspace getWorkspaceById(UUID workspaceId) throws WorkspaceNotFoundException {
-        return null;
-    }
 }

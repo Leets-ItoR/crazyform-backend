@@ -21,7 +21,6 @@ public class WorkspaceUpdateImpl implements WorkspaceUpdate {
 
         workspace.setName(name);
         workspace.setHandle(handle);
-        workspace.setUpdatedAt(LocalDateTime.now());
 
         return workspaceRepository.save(workspace);
     }
