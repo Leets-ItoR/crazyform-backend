@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository
 public interface WorkspaceRepository extends JpaRepository<Workspace, UUID> {
-    // 추가적인 메서드 선언 가능
+
 }

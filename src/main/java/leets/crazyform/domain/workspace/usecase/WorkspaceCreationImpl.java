@@ -20,10 +20,7 @@ public class WorkspaceCreationImpl implements WorkspaceCreation {
         Workspace workspace = Workspace.builder()
                 .name(name)
                 .handle(handle)
-                .createdAt(currentTime)
-                .updatedAt(currentTime)
                 .build();
-
 
         return workspaceRepository.save(workspace);
 

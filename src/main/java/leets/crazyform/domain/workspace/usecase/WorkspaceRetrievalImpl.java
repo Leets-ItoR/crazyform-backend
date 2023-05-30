@@ -17,6 +17,6 @@ public class WorkspaceRetrievalImpl implements WorkspaceRetrieval {
     @Override
     public Workspace getWorkspaceById(UUID workspaceId) throws WorkspaceNotFoundException {
         return workspaceRepository.findById(workspaceId)
-                .orElseThrow(() -> new WorkspaceNotFoundException());
+                .orElseThrow(WorkspaceNotFoundException::new);
     }
 }
