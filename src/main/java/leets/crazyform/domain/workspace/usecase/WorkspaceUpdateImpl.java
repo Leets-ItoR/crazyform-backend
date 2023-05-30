@@ -17,7 +17,7 @@ public class WorkspaceUpdateImpl implements WorkspaceUpdate {
     @Override
     public Workspace updateWorkspace(UUID workspaceId, String name, String handle) throws WorkspaceNotFoundException {
         Workspace workspace = workspaceRepository.findById(workspaceId)
-                .orElseThrow(() -> new WorkspaceNotFoundException("Workspace not found with ID: " + workspaceId));
+                .orElseThrow(() -> new WorkspaceNotFoundException());
 
         workspace.setName(name);
         workspace.setHandle(handle);

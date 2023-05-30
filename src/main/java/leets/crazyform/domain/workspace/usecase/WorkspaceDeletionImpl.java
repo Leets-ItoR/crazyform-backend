@@ -17,7 +17,7 @@ public class WorkspaceDeletionImpl implements WorkspaceDeletion {
     @Override
     public void deleteWorkspace(UUID workspaceId) {
         if (!workspaceRepository.existsById(workspaceId)) {
-            throw new WorkspaceNotFoundException("Workspace not found with ID: " + workspaceId);
+            throw new WorkspaceNotFoundException();
         }
 
         workspaceRepository.deleteById(workspaceId);
