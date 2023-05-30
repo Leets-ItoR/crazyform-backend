@@ -1,4 +1,4 @@
-package leets.crazyform.global.jwt.detail;
+package leets.crazyform.global.auth;
 
 import leets.crazyform.domain.creator.domain.Creator;
 import leets.crazyform.domain.creator.repository.CreatorRepository;

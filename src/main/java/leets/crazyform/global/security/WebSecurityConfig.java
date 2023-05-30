@@ -3,7 +3,7 @@ package leets.crazyform.global.security;
 import leets.crazyform.global.filter.ExceptionHandleFilter;
 import leets.crazyform.global.jwt.JwtFilter;
 import leets.crazyform.global.jwt.JwtProvider;
-import leets.crazyform.global.jwt.detail.OAuthDetailService;
+import leets.crazyform.global.oauth.OAuthDetailService;
 import leets.crazyform.global.oauth.OAuthSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
