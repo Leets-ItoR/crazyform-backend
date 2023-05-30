@@ -1,7 +1,7 @@
-package leets.crazyform.global.jwt.detail;
+package leets.crazyform.global.auth;
 
-import leets.crazyform.domain.user.domain.User;
-import leets.crazyform.domain.user.repository.UserRepository;
+import leets.crazyform.domain.creator.domain.Creator;
+import leets.crazyform.domain.creator.repository.CreatorRepository;
 import leets.crazyform.global.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class AuthDetailsService implements UserDetailsService {
-    private final UserRepository userRepository;
+    private final CreatorRepository creatorRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = this.userRepository
+        Creator creator = this.creatorRepository
                 .findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(ErrorCode.USER_NOT_FOUND.getMessage()));
-        return new AuthDetails(user.getEmail());
+                .orElseThrow(() -> new UsernameNotFoundException(ErrorCode.CREATOR_NOT_FOUND.getMessage()));
+        return new AuthDetails(creator.getEmail());
     }
 }

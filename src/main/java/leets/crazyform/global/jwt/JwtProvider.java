@@ -1,7 +1,7 @@
 package leets.crazyform.global.jwt;
 
 import io.jsonwebtoken.*;
-import leets.crazyform.global.jwt.detail.AuthDetailsService;
+import leets.crazyform.global.auth.AuthDetailsService;
 import leets.crazyform.global.jwt.exception.ExpiredTokenException;
 import leets.crazyform.global.jwt.exception.InvalidTokenException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +65,7 @@ public class JwtProvider {
 
     public Claims parseClaims(String accessToken, boolean isRefreshToken) {
         try {
-            JwtParser parser = Jwts.parser().setSigningKey(isRefreshToken ? refreshSecret : accessToken);
+            JwtParser parser = Jwts.parser().setSigningKey(isRefreshToken ? refreshSecret : accessSecret);
             return parser.parseClaimsJws(accessToken).getBody();
         } catch (ExpiredJwtException e) {
             return e.getClaims();

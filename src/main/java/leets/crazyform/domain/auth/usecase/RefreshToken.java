@@ -1,6 +1,5 @@
-package leets.crazyform.domain.user.usecase;
+package leets.crazyform.domain.auth.usecase;
 
-import leets.crazyform.global.jwt.AuthRole;
 import leets.crazyform.global.jwt.dto.JwtResponse;
 
 public interface RefreshToken {
