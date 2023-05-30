@@ -32,10 +32,4 @@ public class Workspace extends BaseTimeEntity {
     @Column(nullable = false)
     private String handle;
 
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
-
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
-
 }
