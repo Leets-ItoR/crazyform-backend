@@ -22,7 +22,7 @@ public class CreatorSignupImpl implements CreatorSignup {
     @Transactional
     @Override
     public JwtResponse execute(String email, String password, String nickname) throws EmailDuplicateException, PasswordInvalidException {
-        if (creatorRepository.findByEmail(email).isPresent()) {
+        if (creatorRepository.existsByEmail(email)) {
             throw new EmailDuplicateException();
         }
 
