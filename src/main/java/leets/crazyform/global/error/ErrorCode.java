@@ -15,6 +15,7 @@ public enum ErrorCode {
     CREATOR_NOT_FOUND(404, "CREATOR_NOT_FOUND", "존재하지 않는 설문제작자입니다."),
     PASSWORD_NOT_MATCH(400, "PASSWORD_NOT_MATCH", "비밀번호가 일치하지 않습니다."),
     EMAIL_DUPLICATE(409, "EMAIL_DUPLICATE", "중복된 이메일입니다."),
+    WORKSPACE_NOT_FOUND(404, "WORKSPACE_NOT_FOUND", "워크스페이스를 찾을 수 없습니다."),
     ONLY_SOCIAL_LOGIN(400, "ONLY_SOCIAL_LOGIN", "소셜로그인으로 가입한 계정입니다.");
 
     private final int httpStatus;
