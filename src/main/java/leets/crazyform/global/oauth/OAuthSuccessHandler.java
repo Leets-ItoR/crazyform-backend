@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import leets.crazyform.global.jwt.AuthRole;
 import leets.crazyform.global.jwt.JwtProvider;
-import leets.crazyform.global.jwt.detail.OAuthDetails;
 import leets.crazyform.global.jwt.dto.JwtResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

@@ -1,4 +1,4 @@
-package leets.crazyform.global.jwt.detail;
+package leets.crazyform.global.auth;
 
 import leets.crazyform.global.jwt.AuthRole;
 import lombok.AllArgsConstructor;
@@ -6,32 +6,18 @@ import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Map;
 
 @Getter
 @AllArgsConstructor
-public class OAuthDetails implements UserDetails, OAuth2User {
+public class AuthDetails implements UserDetails {
     private final String email;
-    private final String name;
-    private final Map<String, Object> attributes;
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public Map<String, Object> getAttributes() {
-        return attributes;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(AuthRole.ROLE_USER.getRole()));
+        return Collections.singletonList(new SimpleGrantedAuthority(AuthRole.ROLE_CREATOR.getRole()));
     }
 
     @Override
@@ -41,7 +27,7 @@ public class OAuthDetails implements UserDetails, OAuth2User {
 
     @Override
     public String getUsername() {
-        return email;
+        return this.email;
     }
 
     @Override

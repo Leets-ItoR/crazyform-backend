@@ -1,7 +1,7 @@
 package leets.crazyform.global.jwt;
 
 import io.jsonwebtoken.*;
-import leets.crazyform.global.jwt.detail.AuthDetailsService;
+import leets.crazyform.global.auth.AuthDetailsService;
 import leets.crazyform.global.jwt.exception.ExpiredTokenException;
 import leets.crazyform.global.jwt.exception.InvalidTokenException;
 import org.springframework.beans.factory.annotation.Autowired;

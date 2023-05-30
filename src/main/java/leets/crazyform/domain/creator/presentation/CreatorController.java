@@ -60,7 +60,6 @@ public class CreatorController {
         return jwt;
     }
 
-
     @Operation(summary = "설문제작자 토큰갱신", description = "AccessToken을 갱신합니다. 이 때 Cookie에 있는 RefreshToken을 자동으로 가져와 사용합니다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = JwtResponse.class))),

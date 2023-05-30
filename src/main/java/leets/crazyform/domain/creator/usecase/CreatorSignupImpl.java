@@ -8,12 +8,10 @@ import leets.crazyform.global.jwt.AuthRole;
 import leets.crazyform.global.jwt.JwtProvider;
 import leets.crazyform.global.jwt.dto.JwtResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
 public class CreatorSignupImpl implements CreatorSignup {
@@ -24,24 +22,16 @@ public class CreatorSignupImpl implements CreatorSignup {
     @Transactional
     @Override
     public JwtResponse execute(String email, String password, String nickname) throws EmailDuplicateException, PasswordInvalidException {
-        // 이메일 중복 체크
-        if (creatorRepository.findByEmail(email).isPresent()) {
+        if (creatorRepository.existsByEmail(email)) {
             throw new EmailDuplicateException();
         }
 
-        // 패스워드 유효성 체크
-//        if (!password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@$!%*#?&]{8,}$")) {
-//            throw new PasswordInvalidException();
-//        }
-
-        // User 객체 생성
         Creator creator = Creator.builder()
                 .email(email)
                 .nickname(nickname)
                 .password(passwordEncoder.encode(password))
                 .build();
 
-        // User 객체 저장
         creatorRepository.save(creator);
 
         String accessToken = jwtProvider.generateToken(creator.getEmail(), AuthRole.ROLE_CREATOR, false);
